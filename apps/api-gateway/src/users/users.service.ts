@@ -1,3 +1,4 @@
+import { CreateUserDto } from '@app/common/dto';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { catchError, throwError } from 'rxjs';
@@ -16,5 +17,9 @@ export class UsersService {
         return throwError(() => new NotFoundException(error.message));
       }),
     );
+  }
+
+  createOne(body: CreateUserDto) {
+    return this.userClient.send('users.createOne', body);
   }
 }

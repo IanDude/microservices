@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './database/entities/users.entity';
+import { User } from '@app/database';
 import { Repository } from 'typeorm';
 import { RpcException } from '@nestjs/microservices';
+import { CreateUserDto } from '@app/common/dto';
 
 @Injectable()
 export class UsersService {
@@ -24,4 +25,12 @@ export class UsersService {
     if (!user) throw new RpcException('User is not found');
     return user;
   }
+
+  async createOne(body: CreateUserDto) {
+    const newUser = this.usersRepository.create(body);
+    await this.usersRepository.save(newUser);
+    return `User: ${newUser.username} successfully created`;
+  }
+
+  async updateOne(uuid: string) {}
 }

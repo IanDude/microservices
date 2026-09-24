@@ -1,6 +1,7 @@
+import 'dotenv/config';
 import { ConfigService } from '@nestjs/config';
-import { DataSourceOptions } from 'typeorm';
-import { DataSource } from 'typeorm/browser';
+import { DataSource, DataSourceOptions } from 'typeorm';
+import { Permissions, Roles, Todo, User } from '../entities';
 
 export const getTypeOrmConfig = (
   configService: ConfigService,
@@ -11,7 +12,8 @@ export const getTypeOrmConfig = (
   username: configService.get<string>('DB_USER'),
   password: configService.get<string>('DB_PASSWORD'),
   database: configService.get<string>('DB_NAME'),
-  migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
+  entities: [User, Todo, Roles, Permissions],
+  migrations: [__dirname + '/../migrations/*{.ts,.js}'],
   synchronize: false,
   logging: configService.get<string>('NODE_ENV') === 'development',
   schema: 'dbo',

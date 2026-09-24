@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "resolvePackageJsonExports": true,
@@ -19,7 +20,23 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {}
+    "paths": {
+      "@app/common": [
+        "libs/common/src"
+      ],
+      "@app/common/*": [
+        "libs/common/src/*"
+      ],
+      "@app/database": [
+        "./libs/database/src"
+      ],
+      "@app/database/*": [
+        "./libs/database/src/*"
+      ]
+    }
   },
-  "include": ["apps/**/*.ts"]
+  "include": [
+    "apps/**/*.ts",
+    "libs/**/*.ts"
+  ]
 }
