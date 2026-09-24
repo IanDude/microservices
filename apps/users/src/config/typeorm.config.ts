@@ -11,7 +11,6 @@ export const getTypeOrmConfig = (
   username: configService.get<string>('DB_USER'),
   password: configService.get<string>('DB_PASSWORD'),
   database: configService.get<string>('DB_NAME'),
-  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
   synchronize: false,
   logging: configService.get<string>('NODE_ENV') === 'development',

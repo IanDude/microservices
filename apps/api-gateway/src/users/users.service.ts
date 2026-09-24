@@ -1,5 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable()
 export class UsersService {
@@ -10,6 +11,10 @@ export class UsersService {
   }
 
   findOne(uuid: string) {
-    return this.userClient.send('users.findOne', { user_uuid: uuid });
+    return this.userClient.send('users.findOne', { user_uuid: uuid }).pipe(
+      catchError((error: Error) => {
+        return throwError(() => new NotFoundException(error.message));
+      }),
+    );
   }
 }

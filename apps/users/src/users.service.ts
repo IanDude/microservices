@@ -16,5 +16,12 @@ export class UsersService {
     return users;
   }
 
-  async findOne(uuid: string) {}
+  async findOne(uuid: string) {
+    const user = await this.usersRepository.findOne({
+      where: { uuid: uuid },
+      relations: { role: { permission: true } },
+    });
+    if (!user) throw new RpcException('User is not found');
+    return user;
+  }
 }

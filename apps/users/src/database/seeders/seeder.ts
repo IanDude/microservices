@@ -3,9 +3,9 @@ import { getTypeOrmConfig } from '../../config/typeorm.config';
 import { ConfigService } from '@nestjs/config';
 import { User } from '../entities/users.entity';
 import { randomUUID } from 'crypto';
-import { Roles } from '../entities/roles.entitys';
-import { Permissions } from '../entities/permissions.entitys';
-import { Todo } from '../entities/todo.entitys';
+import { Roles } from '../entities/roles.entity';
+import { Permissions } from '../entities/permissions.entity';
+import { Todo } from '../entities/todo.entity';
 
 const seed = async (configService: ConfigService) => {
   const dataSource = new DataSource(getTypeOrmConfig(configService));
